@@ -7,9 +7,9 @@
 # 2. Make sure your mobile number is listed at twitter.com/settings/devices
 # 3. Head to apps.twitter.com and select Keys and Access Tokens
 
-CONSUMER_KEY = 'XXXXXXX'
-CONSUMER_SECRET = 'XXXXXXX'
+CONSUMER_KEY = 'tSzlfYmg55QJMmebMWceoPLn1'
+CONSUMER_SECRET = 'zyZpk9oSyk9gYMtPJM2XzAZml3DTaIqqTAI2FgJiLfVRhLATp3'
 
 # Create a new Access Token
-ACCESS_TOKEN = 'XXXXXXX'
-ACCESS_SECRET = 'XXXXXXX'
+ACCESS_TOKEN = '798437523110248449n7U2odwSZIorYPKlbPHb3zb7gxNnjGW'
+ACCESS_SECRET = 'pnC1LTbRHvue3ySJbse1H2XfFNXHnLATAMwLTY9VoumDS'
