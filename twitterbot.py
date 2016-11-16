@@ -40,8 +40,7 @@ def tweetNow(f):
         for line in tweets:
             if currentTime >= 6 and currentTime < 21: # If it's day, tweet.
                 status = time.strftime("%d %b %Y %H:%M") + " and still #ThisIsNotNormal...DT is not normal! Please Help! " + line
-                #api.update_status(status)
-                print(status)
+                api.update_status(status)
                 pause.hours(1) # Wait 1 hour
             else: # If it's not day sleep all night
                 today = int(time.strftime("%d"))
