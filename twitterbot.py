@@ -10,6 +10,7 @@
 
 import tweepy
 import time
+import pause
 from credentials import *
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
@@ -21,26 +22,32 @@ endTime = 1579478400
 # @param f filename list with tweets
 
 def tweetNow(f):
-    # Open file and get lines
-    filename = open(f, 'r')
-    tweets = filename.readlines()
-    filename.close()
 
-    # Get Current Time
     currentTick = time.time()
-    currentTime = int(time.strftime("%H"))
-    # Loop through Tweets
-    for line in tweets:
-        if currentTime >= 9 and currentTime < 21: # If it's day, tweet.
-            status = time.strftime("%d %b %Y %H:%M") + " and still #ThisIsNotNormal...DT is not normal! Please Help! " + line
-            api.update_status(status)
-            time.sleep(3600) # Wait 1 hour
-        else: # If it's not day sleep all night
-            print("waiting")
-            time.sleep(43200) # Wait 12 hours
-    # End of loop, start over again if it's before the end of time.
-    if currentTick < endTime:
-        tweetNow('tweets.txt')
+    while currentTick < endTime:
+        currentTick = time.time()
+
+        # Open file and get lines
+        filename = open(f, 'r')
+        tweets = filename.readlines()
+        filename.close()
+
+        # Get Current Time
+        currentTime = int(time.strftime("%H"))
+
+        # Loop through Tweets
+        for line in tweets:
+            if currentTime >= 6 and currentTime < 21: # If it's day, tweet.
+                status = time.strftime("%d %b %Y %H:%M") + " and still #ThisIsNotNormal...DT is not normal! Please Help! " + line
+                #api.update_status(status)
+                print(status)
+                pause.hours(1) # Wait 1 hour
+            else: # If it's not day sleep all night
+                today = int(time.strftime("%d"))
+                dt = datetime.datetime.today()
+                dt = dt.replace(day=today+1, hour=6, minute=0, second=0, microsecond=0)
+                pause.until(dt) # Wait until 8AM tomorrow
+
 
 # Start the bot
 tweetNow('tweets.txt')
