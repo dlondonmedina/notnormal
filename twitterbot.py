@@ -33,21 +33,29 @@ def tweetNow(f):
         tweets = filename.readlines()
         filename.close()
 
-        # Get Current Time
-        currentTime = int(time.strftime("%H"))
+        print("Starting Loop")
 
-        # Loop through Tweets
+	# Loop through Tweets
         for line in tweets:
-            if currentTime >= 6 and currentTime < 21: # If it's day, tweet.
-                status = time.strftime("%d %b %Y %H:%M") + " and still #ThisIsNotNormal...DT is not normal! Please Help! " + line
-                api.update_status(status)
-                pause.hours(1) # Wait 1 hour
-            else: # If it's not day sleep all night
-                today = int(time.strftime("%d"))
-                dt = datetime.datetime.today()
-                dt = dt.replace(day=today+1, hour=6, minute=0, second=0, microsecond=0)
-                pause.until(dt) # Wait until 8AM tomorrow
+		# Get Current Time
+		currentTime = init(time.strftime("%H"))
 
+		# Check if it's daytime
+		if currentTime < 6: # If it's before 0600
+			wait = 6 - currentTime
+			print(currentTime + " o'clock. Waiting until 6AM")
+			pause.hours(wait)
+		else if currentTime >= 21:
+			wait = 6 + 24 - currentTime
+			print(currentTime + " o'clock. Waiting until 6AM")
+			pause.hours(wait)
+
+		# Update Status
+		status = time.strftime("%d %b %Y %H:%M") + " and still #ThisIsNotNormal...DT is not normal! Please Help! " + line
+		api.update_status(status)
+		pause.hours(1) # Wait 1 hour
+
+	print("End Loop, restarting")
 
 # Start the bot
 tweetNow('tweets.txt')
