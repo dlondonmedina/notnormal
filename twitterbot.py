@@ -39,16 +39,20 @@ def tweetNow(f):
         for line in tweets:
 		# Get Current Time
 		currentTime = init(time.strftime("%H"))
-
+		# Make Counter
+		count = 0
 		# Check if it's daytime
 		if currentTime < 6: # If it's before 0600
 			wait = 6 - currentTime
 			print(currentTime + " o'clock. Waiting until 6AM")
 			pause.hours(wait)
-		else if currentTime >= 21:
+		elif currentTime >= 21:
 			wait = 6 + 24 - currentTime
 			print(currentTime + " o'clock. Waiting until 6AM")
 			pause.hours(wait)
+		else:
+			print("Printing Status " + count)
+			count += 1
 
 		# Update Status
 		status = time.strftime("%d %b %Y %H:%M") + " and still #ThisIsNotNormal...DT is not normal! Please Help! " + line
