@@ -38,7 +38,7 @@ def tweetNow(f):
 	# Loop through Tweets
         for line in tweets:
 		# Get Current Time
-		currentTime = init(time.strftime("%H"))
+		currentTime = int(time.strftime("%H"))
 		# Make Counter
 		count = 0
 		# Check if it's daytime
@@ -51,7 +51,7 @@ def tweetNow(f):
 			print(currentTime + " o'clock. Waiting until 6AM")
 			pause.hours(wait)
 		else:
-			print("Printing Status " + count)
+			print("Printing Status " + str(count))
 			count += 1
 
 		# Update Status
